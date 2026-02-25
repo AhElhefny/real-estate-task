@@ -2,8 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Contract;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Schema;
 
 class ContractSeeder extends Seeder
 {
@@ -12,6 +13,10 @@ class ContractSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        Schema::disableForeignKeyConstraints();
+        Contract::truncate();
+        Schema::enableForeignKeyConstraints();
+        
+        Contract::factory()->count(10)->create();
     }
 }
