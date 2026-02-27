@@ -14,7 +14,7 @@ class Invoice extends Model
     /** @use HasFactory<\Database\Factories\InvoiceFactory> */
     use HasFactory;
 
-    public $fillable = [
+    protected $fillable = [
         'contract_id',
         'tenant_id',
         'invoice_number',
@@ -26,7 +26,7 @@ class Invoice extends Model
         'paid_at'
     ];
 
-    public $casts = [
+    protected $casts = [
         'tenant_id' => 'integer',
         'contract_id' => 'integer',
         'subtotal' => 'decimal:2',
