@@ -49,7 +49,7 @@ class InvoiceController extends Controller
     {
         $this->authorize('recordPayment', $invoice);
         $dto = RecordPaymentDTO::fromRequest($request,$invoice);
-        $payment = $this->invoiceService->recordPayment($dto);
+        $this->invoiceService->recordPayment($dto);
         $invoice->load('payments');
         return InvoiceResource::make($invoice)->response()->setStatusCode(Response::HTTP_CREATED);
     }

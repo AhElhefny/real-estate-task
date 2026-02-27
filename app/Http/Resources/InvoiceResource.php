@@ -14,6 +14,7 @@ class InvoiceResource extends JsonResource
      */
     public function toArray(Request $request): array
     {
+        $this->loadMissing(['contract', 'payments']);
         return [
             'id' => $this->id,
             'invoice_number' => $this->invoice_number,
@@ -24,11 +25,11 @@ class InvoiceResource extends JsonResource
             'paid_at' => $this->paid_at ? $this->paid_at->format('Y-m-d') : null,
             'contract' => $this->whenLoaded('contract', [
                 'id' => $this->contract?->id,
-                'unit_name' => $this->contract?->property->unit_name,
-                'customer_name' => $this->contract?->customer->name,
+                'unit_name' => $this->contract?->unit_name,
+                'customer_name' => $this->contract?->customer_name,
                 'rent_amount' => $this->contract?->rent_amount,
             ], null),
-            'remaining_balance' => $this->calculateRemainingBalance(),
+            'remaining_balance' => $this->whenLoaded('payments',$this->calculateRemainingBalance(),null),
             'status' => [
                 'value' => $this->status->value,
                 'label' => $this->status->name
