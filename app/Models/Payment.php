@@ -13,7 +13,6 @@ class Payment extends Model
     use HasFactory;
 
     protected $fillable = [
-        'tenant_id',
         'invoice_id',
         'amount',
         'payment_method',
