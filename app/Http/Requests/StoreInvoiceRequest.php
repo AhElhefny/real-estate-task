@@ -22,7 +22,6 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'contract_id' => 'required|exists:contracts,id',
             'tenant_id' => 'required|exists:users,id',
             'due_date' => 'required|date_format:Y-m-d|after_or_equal:today',
         ];

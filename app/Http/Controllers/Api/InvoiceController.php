@@ -48,7 +48,7 @@ class InvoiceController extends Controller
     public function recordPayment(RecordPaymentRequest $request, Invoice $invoice)
     {
         $this->authorize('recordPayment', $invoice);
-        $dto = RecordPaymentDTO::fromRequest($request);
+        $dto = RecordPaymentDTO::fromRequest($request,$invoice);
         $payment = $this->invoiceService->recordPayment($dto);
         $invoice->load('payments');
         return InvoiceResource::make($invoice)->response()->setStatusCode(Response::HTTP_CREATED);

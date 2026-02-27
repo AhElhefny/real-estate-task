@@ -24,7 +24,6 @@ class RecordPaymentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'invoice_id' => 'required|exists:invoices,id',
             'amount' => 'required|numeric|min:0|max:999999.99',
             'payment_method' => ['required', 'string', new Enum(PaymentMethodEnum::class)],
             'reference_number' => 'required|string|min:2|max:255',
